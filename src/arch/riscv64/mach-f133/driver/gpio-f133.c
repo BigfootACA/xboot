@@ -111,7 +111,7 @@ static void gpio_f133_set_pull(struct gpiochip_t * chip, int offset, enum gpio_p
 
 	addr = pdat->virt + GPIO_PUL0 + ((offset >> 4) << 2);
 	val = read32(addr);
-	val &= ~(v << ((offset & 0xf) << 1));
+	val &= ~(0x3 << ((offset & 0xf) << 1));
 	val |= (v << ((offset & 0xf) << 1));
 	write32(addr, val);
 }
@@ -176,7 +176,7 @@ static void gpio_f133_set_drv(struct gpiochip_t * chip, int offset, enum gpio_dr
 
 	addr = pdat->virt + GPIO_DRV0 + ((offset >> 3) << 2);
 	val = read32(addr);
-	val &= ~(v << ((offset & 0x7) << 2));
+	val &= ~(0x3 << ((offset & 0x7) << 2));
 	val |= (v << ((offset & 0x7) << 2));
 	write32(addr, val);
 }

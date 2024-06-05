@@ -109,7 +109,7 @@ static void gpio_s3_set_pull(struct gpiochip_t * chip, int offset, enum gpio_pul
 
 	addr = pdat->virt + GPIO_PUL0 + ((offset >> 4) << 2);
 	val = read32(addr);
-	val &= ~(v << ((offset & 0xf) << 1));
+	val &= ~(0x3 << ((offset & 0xf) << 1));
 	val |= (v << ((offset & 0xf) << 1));
 	write32(addr, val);
 }
@@ -174,7 +174,7 @@ static void gpio_s3_set_drv(struct gpiochip_t * chip, int offset, enum gpio_drv_
 
 	addr = pdat->virt + GPIO_DRV0 + ((offset >> 4) << 2);
 	val = read32(addr);
-	val &= ~(v << ((offset & 0xf) << 1));
+	val &= ~(0x3 << ((offset & 0xf) << 1));
 	val |= (v << ((offset & 0xf) << 1));
 	write32(addr, val);
 }
